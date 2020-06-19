@@ -4,6 +4,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
+from dash.dependencies import Output, Input
 
 server = flask.Flask(__name__)
 
@@ -43,9 +44,6 @@ app.layout = html.Div([
     )
 ])
 
-@app.callback(dash.dependencies.Output('display-value', 'children'),
-              [dash.dependencies.Input('dropdown', 'value')])
-
+@app.callback(dash.dependencies.Output('display-value', 'children'), dash.dependencies.Input('dropdown', 'value'))
 if __name__ == '__main__':
     app.run_server(debug=True)
-
