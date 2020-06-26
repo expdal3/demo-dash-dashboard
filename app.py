@@ -6,6 +6,11 @@ import dash_html_components as html
 import pandas as pd
 from dash.dependencies import Output, Input
 
+# dash-example folder contain a ready-to-pushed demo Dash dashboard chart.
+# it contain a virtualenv folder 'venv' which contain all the python dependencies 
+# the dependencies will be downloaded base on the list of package described in the requirement.txt file
+# the .gitignore file contain the list of files and folder that would not be push to Heroku
+
 server = flask.Flask(__name__)
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -15,7 +20,15 @@ server = app.server
 
 df = pd.read_csv('https://trello-attachments.s3.amazonaws.com/5bd586986a1afd42ce16e477/5ee2fa032e551158843f1905/8fb59309ca45eef878cc9c34197f4750/pop-median-rent.csv')
 
-app.layout = html.Div([
+app.layout = html.Div(
+    children=[
+    html.H1(children='Dashboard for Property Analysis'),
+
+    html.Div(children='''
+        Population vs median rental in Australian major cities:
+    '''
+    ),
+
     dcc.Graph(
         id='pop-vs-median-rent',
         figure={
